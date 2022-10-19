@@ -32,6 +32,8 @@ class GuestbookForm {
 	private final @NotBlank String name;
 	private final @NotBlank String text;
 
+	private final @NotBlank String email;
+
 	/**
 	 * Creates a new {@link GuestbookForm} with the given name and text. Spring Framework will use this constructor to
 	 * bind the values provided in the web form described in {@code src/main/resources/templates/guestbook.html}, in
@@ -42,10 +44,11 @@ class GuestbookForm {
 	 * @param name the value to bind to {@code name}
 	 * @param text the value to bind to {@code text}
 	 */
-	public GuestbookForm(String name, String text) {
+	public GuestbookForm(String name, String text, String email) {
 
 		this.name = name;
 		this.text = text;
+		this.email = email;
 	}
 
 	/**
@@ -70,13 +73,19 @@ class GuestbookForm {
 		return text;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	/**
 	 * Returns a new {@link GuestbookEntry} using the data submitted in the request.
 	 *
 	 * @return the newly created {@link GuestbookEntry}
 	 * @throws IllegalArgumentException if you call this on an instance without the name and text actually set.
 	 */
+
+
 	GuestbookEntry toNewEntry() {
-		return new GuestbookEntry(getName(), getText());
+		return new GuestbookEntry(getName(), getText(), getEmail());
 	}
 }
